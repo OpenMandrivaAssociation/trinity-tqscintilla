@@ -5,7 +5,7 @@
 %if "%{?tde_version}" == ""
 %define tde_version 14.1.5
 %endif
-%define pkg_rel 3
+%define pkg_rel 4
 
 %define tde_pkg tqscintilla
 
@@ -31,19 +31,15 @@ URL:		http://www.trinitydesktop.org/
 
 License:	GPLv2+
 
-#Vendor:		Trinity Desktop
-#Packager:	Francois Andriot <francois.andriot@free.fr>
-
 Source0:		https://mirror.ppa.trinitydesktop.org/trinity/releases/R%{tde_version}/main/dependencies/%{tarball_name}-%{tde_version}%{?preversion:~%{preversion}}.tar.xz
 Source1:		trinity-tqscintilla-rpmlintrc
 
 BuildSystem:    cmake
 BuildOption:    -DCMAKE_BUILD_TYPE="RelWithDebInfo"
-BuildOption:    -DCMAKE_NO_BUILTIN_CHRPATH=ON
 BuildOption:    -DCMAKE_VERBOSE_MAKEFILE=ON
-BuildOption:    -DWITH_GCC_VISIBILITY=ON
-BuildOption:    -DBUILD_ALL="ON"
-BuildOption:    -DWITH_ALL_OPTIONS="ON"
+BuildOption:    -DBUILD_ALL=ON
+BuildOption:    -DWITH_ALL_OPTIONS=ON
+BuildOption:    -DWITH_GCC_VISIBILITY=%{!?with_clang:ON}%{?with_clang:OFF}
 
 BuildRequires:	trinity-tdelibs-devel >= %{tde_version}
 BuildRequires:	trinity-filesystem >= %{tde_version}
