@@ -5,11 +5,11 @@
 %if "%{?tde_version}" == ""
 %define tde_version 14.1.5
 %endif
-%define pkg_rel 4
 
 %define tde_pkg tqscintilla
 
-%define libtqscintilla %{_lib}tqscintilla
+%define libname %mklibname %{tde_pkg}
+%define devname %mklibname %{tde_pkg} -d
 
 %undefine __brp_remove_la_files
 %define dont_remove_libtool_files 1
@@ -24,14 +24,14 @@
 Name:		trinity-%{tde_pkg}
 Epoch:		%{tde_epoch}
 Version:	1.7.1
-Release:	%{?tde_version}_%{?!preversion:%{pkg_rel}}%{?preversion:0_%{preversion}}%{?dist}
+Release:	%{?tde_version:%{tde_version}_}5
 Summary:	TQt source code editing component based on Scintilla
 Group:		Development/Libraries/C and C++
 URL:		http://www.trinitydesktop.org/
 
 License:	GPLv2+
 
-Source0:		https://mirror.ppa.trinitydesktop.org/trinity/releases/R%{tde_version}/main/dependencies/%{tarball_name}-%{tde_version}%{?preversion:~%{preversion}}.tar.xz
+Source0:		https://mirror.ppa.trinitydesktop.org/trinity/releases/R%{tde_version}/main/dependencies/%{tarball_name}-%{tde_version}.tar.xz
 Source1:		trinity-tqscintilla-rpmlintrc
 
 BuildSystem:    cmake
@@ -60,26 +60,18 @@ TQScintilla is a port or Scintilla to the TQt GUI toolkit.
 
 ##########
 
-%package -n %{libtqscintilla}7
+%package -n %{libname}7
 Summary:	TQt source code editing component based on Scintilla
 Group:		Development/Libraries/C and C++
-Provides:	libtqscintilla = %{?epoch:%{epoch}:}%{version}-%{release}
-Requires:	libtqt3-mt >= 3.5.0
 
-%description -n %{libtqscintilla}7
+%description -n %{libname}7
 Scintilla is a free source code editing component. It has features found
 in standard editing components, as well as features especially useful
 when editing and debugging source code.
 
 TQScintilla is a port or Scintilla to the TQt GUI toolkit.
 
-%post -n %{libtqscintilla}7
-/sbin/ldconfig
-
-%postun -n %{libtqscintilla}7
-/sbin/ldconfig
-
-%files -n %{libtqscintilla}7
+%files -n %{libname}7
 %defattr(-,root,root,-)
 %doc ChangeLog LICENSE NEWS README
 %{_libdir}/libtqscintilla.so.7
@@ -90,23 +82,15 @@ TQScintilla is a port or Scintilla to the TQt GUI toolkit.
 
 ##########
 
-%package -n %{libtqscintilla}-devel
+%package -n %{devname}
 Summary:	TQScintilla Development Files
 Group:		Development/Libraries/C and C++
-Provides:	libtqscintilla-devel = %{?epoch:%{epoch}:}%{version}-%{release}
-Requires:	%{libtqscintilla}7 = %{?epoch:%{epoch}:}%{version}-%{release}
-Requires:	libtqt3-mt-devel >= 3.5.0
+Requires:	%{libname}7 = %{?epoch:%{epoch}:}%{version}-%{release}
 
-%description -n %{libtqscintilla}-devel
+%description -n %{devname}
 This package contains the development files for tqscintilla.
 
-%post -n %{libtqscintilla}-devel
-/sbin/ldconfig
-
-%postun -n %{libtqscintilla}-devel
-/sbin/ldconfig
-
-%files -n %{libtqscintilla}-devel
+%files -n %{devname}
 %defattr(-,root,root,-)
 #%{_includedir}/tqscintilla/
 %{_includedir}/tqt3/tqextscintilla.h
@@ -145,17 +129,15 @@ This package contains the development files for tqscintilla.
 
 ##########
 
-%package -n %{libtqscintilla}-doc
+%package -n %{libname}-doc
 Summary:	TQScintilla Documentation
 Group:		Development/Libraries/C and C++
-Provides:	libtqscintilla-doc = %{?epoch:%{epoch}:}%{version}-%{release}
-Requires:	%{libtqscintilla}7 = %{?epoch:%{epoch}:}%{version}-%{release}
-Requires:	trinity-filesystem >= %{tde_version}
+Requires:	%{libname}7 = %{?epoch:%{epoch}:}%{version}-%{release}
 
-%description -n %{libtqscintilla}-doc
+%description -n %{libname}-doc
 This package contains the documentation for tqscintilla.
 
-%files -n %{libtqscintilla}-doc
+%files -n %{libname}-doc
 %defattr(-,root,root,-)
 %{_docdir}/libtqscintilla/
 
