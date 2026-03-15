@@ -85,7 +85,7 @@ TQScintilla is a port or Scintilla to the TQt GUI toolkit.
 %package -n %{devname}
 Summary:	TQScintilla Development Files
 Group:		Development/Libraries/C and C++
-Requires:	%{libname}7 = %{?epoch:%{epoch}:}%{version}-%{release}
+Requires:	%{libname}7 = %{EVRD}
 
 %description -n %{devname}
 This package contains the development files for tqscintilla.
@@ -132,7 +132,7 @@ This package contains the development files for tqscintilla.
 %package -n %{libname}-doc
 Summary:	TQScintilla Documentation
 Group:		Development/Libraries/C and C++
-Requires:	%{libname}7 = %{?epoch:%{epoch}:}%{version}-%{release}
+Requires:	%{libname}7 = %{EVRD}
 
 %description -n %{libname}-doc
 This package contains the documentation for tqscintilla.
