@@ -22,7 +22,7 @@
 
 Name:		trinity-%{tde_pkg}
 Version:	1.7.1
-Release:	%{?tde_version:%{tde_version}_}5
+Release:	%{?tde_version:%{tde_version}_}6
 Summary:	TQt source code editing component based on Scintilla
 Group:		Development/Libraries/C and C++
 URL:		http://www.trinitydesktop.org/
@@ -41,9 +41,8 @@ BuildOption:    -DWITH_GCC_VISIBILITY=%{!?with_clang:ON}%{?with_clang:OFF}
 
 BuildRequires:	trinity-tdelibs-devel >= %{tde_version}
 BuildRequires:	trinity-filesystem >= %{tde_version}
-BuildRequires:  pkgconfig(tqt)
 BuildRequires:	trinity-tde-cmake >= %{tde_version}
-BuildRequires:  tqt3-dev-tools
+BuildRequires:  pkgconfig(tqt)
 
 BuildRequires:	desktop-file-utils
 
